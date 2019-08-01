@@ -1,4 +1,4 @@
-package service;
+package service.persistence;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;

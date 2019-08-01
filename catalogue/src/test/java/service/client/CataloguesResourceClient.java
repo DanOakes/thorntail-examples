@@ -1,4 +1,4 @@
-package client;
+package service.client;
 
 import service.api.CataloguesResponse;
 import service.api.ItemsResponse;

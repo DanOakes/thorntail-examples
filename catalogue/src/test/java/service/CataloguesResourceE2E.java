@@ -1,6 +1,6 @@
 package service;
 
-import client.CataloguesResourceClient;
+import service.client.CataloguesResourceClient;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import org.jboss.arquillian.container.test.api.Deployment;

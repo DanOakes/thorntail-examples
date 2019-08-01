@@ -20,14 +20,20 @@ import service.api.CataloguesResponse;
 import service.api.ItemsResponse;
 import service.domain.Catalogues;
 import service.domain.Items;
+import service.manager.CatalogueManager;
+import service.persistence.PersistenceHelper;
 
 @Path("/catalogues")
 public class CataloguesResource {
 	
     @Inject
-    PersistenceHelper ph;
+	PersistenceHelper ph;
 
-    @Inject
+	@Inject
+	CatalogueManager catalogueManager;
+
+
+	@Inject
     @ConfigProperty(name = "application.validation")
     private String validation;
 
@@ -35,28 +41,9 @@ public class CataloguesResource {
     @Counted()
     @Produces(MediaType.APPLICATION_JSON)
     public List<CataloguesResponse> get() {
-    	
-    	EntityManager em = ph.getEntityManager();
-    	TypedQuery<Catalogues> tq = em.createNamedQuery("Catalogues.findAll", Catalogues.class);
-    	List<Catalogues> cats = tq.getResultList();
-    	    	
-    	List<CataloguesResponse> resp = new ArrayList<CataloguesResponse>(cats.size());
-    	
-    	for (int i = 0; i < cats.size(); i++) {
-    		
-    		CataloguesResponse cr = new CataloguesResponse();
-    		cr.setId(cats.get(i).getId());
-    		cr.setName(cats.get(i).getName());
-    		cr.setType(cats.get(i).getType());
-    		cr.setUrl(cats.get(i).getUrl());
-    		cr.setCode(cats.get(i).getCode());
-    		cr.setStatus(cats.get(i).getStatus());
-    		
-    		resp.add(cr);
-    		
-    	}
+
+		return catalogueManager.getAllCatalogues();
     	   	
-        return resp;
    }
     
     @GET
